@@ -15,8 +15,9 @@ elif [ ! -d "$targetDir" ]; then
 	exit 1
 else
 	fileCount=$(find "$targetDir" -mindepth 1 | wc -l)
-	if [[ $fileCount <= 0]]; then
+	if [[ $fileCount -le 0 ]]; then
 		echo "Directory is empty"
+		echo "No files were deleted"
 		exit 0
 	fi
 	echo "Found "$fileCount" files and subdirectories in "$targetDir": "
