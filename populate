@@ -1,0 +1,43 @@
+#!/bin/bash
+
+targetDir="$1"
+
+# Check if target directory exists
+if [ ! "$targetDir" ]; then
+        echo "ERROR: No argument given"
+        exit 1
+elif [ ! -d "$targetDir" ]; then
+        echo "ERROR: Directory '"$targetDir"' does not exist"
+        exit 1
+
+# Main script sequence
+else
+	echo "Number of files:"
+	read fileNum
+
+# Take file number; exit if none given
+	if [ ! fileNum ]; then
+		echo "ERROR: No argument given"
+		exit 1
+	fi
+
+# Take file name; exit if none given
+	echo "Base file name: "
+	read fileName
+
+	if [ ! fileName ]; then
+		echo "ERROR: No argument given"
+		exit 1
+	fi
+
+# Change directories and create files; return to previous working directory
+	cd "$targetDir"
+	for ((i=1; i<=fileNum; i++)); do
+		touch "${fileName}_${i}.txt"
+	done
+	cd -
+fi
+
+# Completion
+echo "File creation completed"
+echo "Created "$fileNum" files"
