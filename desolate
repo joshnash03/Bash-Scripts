@@ -2,11 +2,13 @@
 
 targetDir="$1"
 
+# Declare function to delete files
 deleteFiles() {
 	echo "Deleting files . . ."
 	find "$targetDir" -mindepth 1 -delete
 }
 
+# Show error if target directory is invalid
 if [ ! "$targetDir" ]; then
 	echo "ERROR: No argument given"
 	exit 1
@@ -14,12 +16,16 @@ elif [ ! -d "$targetDir" ]; then
 	echo "ERROR: Directory '"$targetDir"' does not exist"
 	exit 1
 else
+
+# Determine number of files in target directory, exit for zero files
 	fileCount=$(find "$targetDir" -mindepth 1 | wc -l)
 	if [[ $fileCount -le 0 ]]; then
 		echo "Directory is empty"
 		echo "No files were deleted"
 		exit 0
 	fi
+
+# List files and ask for permission; execute function if permission is given
 	echo "Found "$fileCount" files and subdirectories in "$targetDir": "
 	find "$targetDir" -mindepth 1
 	echo "Delete all files in "$targetDir"? (y/n)"
