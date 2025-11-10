@@ -35,6 +35,7 @@ else
 		echo "Deleted "$fileCount" files and directories"
 		exit 0
 	elif [[ $permission == n ]]; then
+		echo "Aborted"
 		echo "No files were deleted"
 		exit 0
 	else
